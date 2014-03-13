@@ -1,0 +1,7 @@
+<phpunit colors="true">
+    <filter>
+        <whitelist>
+            <directory>src</directory>
+        </whitelist>
+    </filter>
+</phpunit>

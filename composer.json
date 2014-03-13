@@ -1,0 +1,28 @@
+{
+    "name": "dominionenterprises/memoize",
+    "description": "A library for memoizing repeated function calls.",
+    "keywords": ["memoization", "predis", "cache", "optimization"],
+    "authors": [
+        {
+            "name": "Spencer Rinehart",
+            "email": "anubis@overthemonkey.com",
+            "role": "Developer"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "require-dev": {
+        "predis/predis": "~0.8.4",
+        "phpunit/phpunit": "~4.0",
+        "squizlabs/php_codesniffer": "~1.5",
+        "lib-libxml": "*"
+    },
+    "suggest": {
+        "predis/predis": "Allows for Redis-based memoization."
+    },
+    "autoload": {
+        "psr-4": { "DominionEnterprises\\Memoize\\": "src/" }
+    }
+}
