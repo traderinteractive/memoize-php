@@ -1,6 +1,8 @@
 # Memoize
 A PHP library for memoizing repeated function calls.
 
+[![Build Status](https://travis-ci.org/dominionenterprises/memoize-php.png)](https://travis-ci.org/dominionenterprises/memoize-php)
+
 ## Requirements
 This library requires PHP 5.3, or newer.
 
