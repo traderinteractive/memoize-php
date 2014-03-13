@@ -118,20 +118,6 @@ class PredisTest extends \PHPUnit_Framework_TestCase
 
     private function _getPredisMock()
     {
-        return $this->getMock(
-            '\Predis\Client',
-            array(
-                'get',
-                'set',
-                'expire',
-                'getProfile',
-                'getOptions',
-                'connect',
-                'disconnect',
-                'getConnection',
-                'createCommand',
-                'executeCommand',
-            )
-        );
+        return $this->getMock('\Predis\Client', array('get', 'set', 'expire'));
     }
 }
