@@ -16,7 +16,7 @@ class PredisTest extends \PHPUnit_Framework_TestCase
         $count = 0;
         $key = 'foo';
         $value = 'bar';
-        $cachedValue = json_encode(['result' => $value]);
+        $cachedValue = json_encode(array('result' => $value));
         $compute = function() use(&$count, $value) {
             $count++;
 
@@ -43,7 +43,7 @@ class PredisTest extends \PHPUnit_Framework_TestCase
         $count = 0;
         $key = 'foo';
         $value = 'bar';
-        $cachedValue = json_encode(['result' => $value]);
+        $cachedValue = json_encode(array('result' => $value));
         $compute = function() use(&$count, $value) {
             $count++;
 
@@ -69,7 +69,7 @@ class PredisTest extends \PHPUnit_Framework_TestCase
         $count = 0;
         $key = 'foo';
         $value = 'bar';
-        $cachedValue = json_encode(['result' => $value]);
+        $cachedValue = json_encode(array('result' => $value));
         $cacheTime = 1234;
         $compute = function() use(&$count, $value) {
             $count++;
@@ -98,7 +98,7 @@ class PredisTest extends \PHPUnit_Framework_TestCase
         $count = 0;
         $key = 'foo';
         $value = 'bar';
-        $cachedValue = json_encode(['result' => $value]);
+        $cachedValue = json_encode(array('result' => $value));
         $compute = function() use(&$count, $value) {
             $count++;
 
@@ -120,7 +120,18 @@ class PredisTest extends \PHPUnit_Framework_TestCase
     {
         return $this->getMock(
             '\Predis\ClientInterface',
-            ['get', 'set', 'expire', 'getProfile', 'getOptions', 'connect', 'disconnect', 'getConnection', 'createCommand', 'executeCommand']
+            array(
+                'get',
+                'set',
+                'expire',
+                'getProfile',
+                'getOptions',
+                'connect',
+                'disconnect',
+                'getConnection',
+                'createCommand',
+                'executeCommand',
+            )
         );
     }
 }
