@@ -1,7 +1,7 @@
 <?php
 namespace DominionEnterprises\Memoize;
 
-use \Predis\ClientInterface;
+use \Predis\Client;
 
 /**
  * A memoizer that caches the results in a redis cache.  
@@ -11,16 +11,16 @@ class Predis implements Memoize
     /**
      * The predis client
      *
-     * @var \Predis\ClientInterface
+     * @var \Predis\Client
      */
     private $_client;
 
     /**
      * Sets the predis client.
      *
-     * @param \Predis\ClientInterface $client The predis client to use
+     * @param \Predis\Client $client The predis client to use
      */
-    public function __construct(ClientInterface $client)
+    public function __construct(Client $client)
     {
         $this->_client = $client;
     }

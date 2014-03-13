@@ -119,7 +119,7 @@ class PredisTest extends \PHPUnit_Framework_TestCase
     private function _getPredisMock()
     {
         return $this->getMock(
-            '\Predis\ClientInterface',
+            '\Predis\Client',
             array(
                 'get',
                 'set',
