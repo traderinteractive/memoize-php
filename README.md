@@ -2,6 +2,8 @@
 A PHP library for memoizing repeated function calls.
 
 [![Build Status](https://travis-ci.org/dominionenterprises/memoize-php.png)](https://travis-ci.org/dominionenterprises/memoize-php)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dominionenterprises/memoize-php/badges/quality-score.png?s=25ab188709941f6b6de105c8250c971f4f3d8982)](https://scrutinizer-ci.com/g/dominionenterprises/memoize-php/)
+[![Code Coverage](https://scrutinizer-ci.com/g/dominionenterprises/memoize-php/badges/coverage.png?s=927286917d2abd01c27eea906b91fbef071810f5)](https://scrutinizer-ci.com/g/dominionenterprises/memoize-php/)
 
 ## Requirements
 This library requires PHP 5.3, or newer.
