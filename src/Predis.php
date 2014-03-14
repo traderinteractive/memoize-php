@@ -44,16 +44,28 @@ class Predis implements Memoize
 
         $result = call_user_func($compute);
 
+        $this->_cache($key, json_encode(array('result' => $result)), $cacheTime);
+
+        return $result;
+    }
+
+    /**
+     * Caches the value into redis with errors suppressed.
+     *
+     * @param string $key The key.
+     * @param string $value The value.
+     * @param int $cacheTime The optional cache time
+     * @return void
+     */
+    private function _cache($key, $value, $cacheTime = null)
+    {
         try {
-            $this->_client->set($key, json_encode(array('result' => $result)));
+            $this->_client->set($key, $value);
 
             if ($cacheTime !== null) {
                 $this->_client->expire($key, $cacheTime);
             }
         } catch (\Exception $e) {
-            return $result;
         }
-
-        return $result;
     }
 }

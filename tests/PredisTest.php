@@ -3,6 +3,7 @@ namespace DominionEnterprises\Memoize;
 
 /**
  * @coversDefaultClass \DominionEnterprises\Memoize\Predis
+ * @covers ::<private>
  */
 class PredisTest extends \PHPUnit_Framework_TestCase
 {
