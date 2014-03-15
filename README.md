@@ -18,7 +18,8 @@ This package uses [composer](https://getcomposer.org) so you can just add
 `dominionenterprises/memoize` as a dependency to your `composer.json` file.
 
 ## Memoization
-[Memoization](http://en.wikipedia.org/wiki/Memoization) is a way of optimizing a function that is called repeatedly by caching the results of a function call.
+[Memoization](http://en.wikipedia.org/wiki/Memoization) is a way of optimizing
+a function that is called repeatedly by caching the results of a function call.
 
 ## Memoization Providers
 This library includes several built-in providers for memoization.  Each one
