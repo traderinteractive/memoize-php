@@ -60,6 +60,19 @@ $getLoggedInUser = function() use($database, $loggedInUserId, $getUser) {
 $memoize->memoizeCallable("getUser-{$loggedInUserId}", $getLoggedInUser);
 ```
 
+Alternatively, you could invert this and return the closure instead, like so:
+
+```php
+$getUserLocator = function($database, $userId) use($getUser) {
+    return function() use($database, $userId, $getUser) {
+        return $getUser($database, $userId);
+    };
+};
+
+$getLoggedInUser = $getUserLocator($database, $loggedInUserId);
+$memoize->memoizeCallable("getUser-{$loggedInUserId}", $getLoggedInUser);
+```
+
 Future versions of this library may add support for parameters, as it can be a
 common usecase (especially when it comes to recursive functions.
 
