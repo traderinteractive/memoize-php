@@ -18,7 +18,8 @@ This package uses [composer](https://getcomposer.org) so you can just add
 `dominionenterprises/memoize` as a dependency to your `composer.json` file.
 
 ## Memoization
-[Memoization](http://en.wikipedia.org/wiki/Memoization) is a way of optimizing a function that is called repeatedly by caching the results of a function call.
+[Memoization](http://en.wikipedia.org/wiki/Memoization) is a way of optimizing
+a function that is called repeatedly by caching the results of a function call.
 
 ## Memoization Providers
 This library includes several built-in providers for memoization.  Each one
@@ -57,6 +58,19 @@ $getLoggedInUser = function() use($database, $loggedInUserId, $getUser) {
     return $getUser($database, $loggedInUserId);
 };
 
+$memoize->memoizeCallable("getUser-{$loggedInUserId}", $getLoggedInUser);
+```
+
+Alternatively, you could invert this and return the closure instead, like so:
+
+```php
+$getUserLocator = function($database, $userId) use($getUser) {
+    return function() use($database, $userId, $getUser) {
+        return $getUser($database, $userId);
+    };
+};
+
+$getLoggedInUser = $getUserLocator($database, $loggedInUserId);
 $memoize->memoizeCallable("getUser-{$loggedInUserId}", $getLoggedInUser);
 ```
 
