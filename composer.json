@@ -16,8 +16,7 @@
     "require-dev": {
         "predis/predis": "~0.8.4",
         "phpunit/phpunit": "~4.0",
-        "squizlabs/php_codesniffer": "~1.5",
-        "lib-libxml": "*"
+        "squizlabs/php_codesniffer": "~1.5"
     },
     "suggest": {
         "predis/predis": "Allows for Redis-based memoization."

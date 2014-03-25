@@ -13,17 +13,7 @@ if ($returnStatus !== 0) {
     exit(1);
 }
 
-passthru('./vendor/bin/phpunit --coverage-html coverage --coverage-clover clover.xml --strict tests', $returnStatus);
+passthru('./vendor/bin/phpunit --coverage-html coverage --strict tests', $returnStatus);
 if ($returnStatus !== 0) {
     exit(1);
 }
-
-$xml = new SimpleXMLElement(file_get_contents('clover.xml'));
-foreach ($xml->xpath('//file/metrics') as $metric) {
-    if ((int)$metric['elements'] !== (int)$metric['coveredelements']) {
-        file_put_contents('php://stderr', "Code coverage was NOT 100%\n");
-        exit(1);
-    }
-}
-
-echo "Code coverage was 100%\n";
