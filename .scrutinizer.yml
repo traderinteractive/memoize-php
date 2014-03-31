@@ -4,6 +4,7 @@ filter:
 before_commands:
     - 'composer install --dev'
 tools:
+    php_analyzer: true
     php_mess_detector: true
     php_code_sniffer:
         config:
@@ -11,8 +12,8 @@ tools:
     sensiolabs_security_checker: true
     php_code_coverage:
         test_command: './vendor/bin/phpunit --strict'
-    php_cpd: true
     php_loc:
         excluded_dirs:
             - vendor
     php_pdepend: true
+    php_sim: true
