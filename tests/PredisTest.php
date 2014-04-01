@@ -44,7 +44,6 @@ class PredisTest extends \PHPUnit_Framework_TestCase
         $count = 0;
         $key = 'foo';
         $value = 'bar';
-        $cachedValue = json_encode(array('result' => $value));
         $compute = function() use(&$count, $value) {
             $count++;
 

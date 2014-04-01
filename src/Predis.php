@@ -66,6 +66,8 @@ class Predis implements Memoize
                 $this->_client->expire($key, $cacheTime);
             }
         } catch (\Exception $e) {
+            // We don't want exceptions in accessing the cache to break functionality.  The cache should be as transparent as possible.
+            // If insight is needed into these exceptions, a better way would be by notifying an observer with the errors.
         }
     }
 }
