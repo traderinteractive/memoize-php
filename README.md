@@ -1,14 +1,13 @@
 # Memoize
 A PHP library for memoizing repeated function calls.
 
-[![Build Status](https://travis-ci.org/dominionenterprises/memoize-php.png)](https://travis-ci.org/dominionenterprises/memoize-php)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dominionenterprises/memoize-php/badges/quality-score.png?s=25ab188709941f6b6de105c8250c971f4f3d8982)](https://scrutinizer-ci.com/g/dominionenterprises/memoize-php/)
-[![Code Coverage](https://scrutinizer-ci.com/g/dominionenterprises/memoize-php/badges/coverage.png?s=927286917d2abd01c27eea906b91fbef071810f5)](https://scrutinizer-ci.com/g/dominionenterprises/memoize-php/)
+[![Build Status](http://img.shields.io/travis/dominionenterprises/memoize-php.svg?style=flat)](https://travis-ci.org/dominionenterprises/memoize-php)
+[![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/dominionenterprises/memoize-php.svg?style=flat)](https://scrutinizer-ci.com/g/dominionenterprises/memoize-php/)
+[![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/dominionenterprises/memoize-php.svg?style=flat)](https://scrutinizer-ci.com/g/dominionenterprises/memoize-php/)
 
-[![Latest Stable Version](https://poser.pugx.org/dominionenterprises/memoize/v/stable.png)](https://packagist.org/packages/dominionenterprises/memoize)
-[![Total Downloads](https://poser.pugx.org/dominionenterprises/memoize/downloads.png)](https://packagist.org/packages/dominionenterprises/memoize)
-[![Latest Unstable Version](https://poser.pugx.org/dominionenterprises/memoize/v/unstable.png)](https://packagist.org/packages/dominionenterprises/memoize)
-[![License](https://poser.pugx.org/dominionenterprises/memoize/license.png)](https://packagist.org/packages/dominionenterprises/memoize)
+[![Latest Stable Version](http://img.shields.io/packagist/v/dominionenterprises/memoize.svg?style=flat)](https://packagist.org/packages/dominionenterprises/memoize)
+[![Total Downloads](http://img.shields.io/packagist/dt/dominionenterprises/memoize.svg?style=flat)](https://packagist.org/packages/dominionenterprises/memoize)
+[![License](http://img.shields.io/packagist/l/dominionenterprises/memoize.svg?style=flat)](https://packagist.org/packages/dominionenterprises/memoize)
 
 ## Requirements
 This library requires PHP 5.3, or newer.
