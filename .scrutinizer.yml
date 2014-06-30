@@ -1,6 +1,7 @@
 filter:
     excluded_paths:
         - 'vendor/*'
+        - 'tests/*'
 before_commands:
     - 'composer install --dev'
 tools:
@@ -11,9 +12,10 @@ tools:
             standard: PSR1
     sensiolabs_security_checker: true
     php_code_coverage:
-        test_command: './vendor/bin/phpunit --strict'
+        test_command: './vendor/bin/phpunit'
     php_loc:
         excluded_dirs:
             - vendor
+            - tests
     php_pdepend: true
     php_sim: true
