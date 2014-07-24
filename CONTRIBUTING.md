@@ -11,5 +11,11 @@ and we can get things merged in quicker when we understand its expected usage.
 Our [build](build.php) runs the code through the [PSR-1](http://www.php-fig.org/psr/psr-1/) coding standard and through our test suite.
 Failures in either will keep us from merging the pull request.  The test suite MUST have 100% code coverage in the report.
 
+There is also a [docker](http://www.docker.com/)-based [fig](http://www.fig.sh/) configuration that will execute the build inside a docker
+container.  This is an easy way to build the application:
+```sh
+fig run build
+```
+
 ## Travis CI
 Our [Travis build](https://travis-ci.org/dominionenterprises/memoize-php) executes the build above against pull requests.
