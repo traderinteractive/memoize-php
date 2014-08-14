@@ -10,7 +10,7 @@ A PHP library for memoizing repeated function calls.
 [![License](http://img.shields.io/packagist/l/dominionenterprises/memoize.svg?style=flat)](https://packagist.org/packages/dominionenterprises/memoize)
 
 ## Requirements
-This library requires PHP 5.3, or newer.
+This library requires PHP 5.4, or newer.
 
 ## Installation
 This package uses [composer](https://getcomposer.org) so you can just add
