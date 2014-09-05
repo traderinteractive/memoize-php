@@ -3,7 +3,7 @@ A PHP library for memoizing repeated function calls.
 
 [![Build Status](http://img.shields.io/travis/dominionenterprises/memoize-php.svg?style=flat)](https://travis-ci.org/dominionenterprises/memoize-php)
 [![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/dominionenterprises/memoize-php.svg?style=flat)](https://scrutinizer-ci.com/g/dominionenterprises/memoize-php/)
-[![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/dominionenterprises/memoize-php.svg?style=flat)](https://scrutinizer-ci.com/g/dominionenterprises/memoize-php/)
+[![Code Coverage](http://img.shields.io/coveralls/dominionenterprises/memoize-php.svg?style=flat)](https://coveralls.io/r/dominionenterprises/memoize-php)
 
 [![Latest Stable Version](http://img.shields.io/packagist/v/dominionenterprises/memoize.svg?style=flat)](https://packagist.org/packages/dominionenterprises/memoize)
 [![Total Downloads](http://img.shields.io/packagist/dt/dominionenterprises/memoize.svg?style=flat)](https://packagist.org/packages/dominionenterprises/memoize)
