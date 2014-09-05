@@ -44,7 +44,7 @@ class Predis implements Memoize
 
         $result = call_user_func($compute);
 
-        $this->_cache($key, json_encode(array('result' => $result)), $cacheTime);
+        $this->_cache($key, json_encode(['result' => $result]), $cacheTime);
 
         return $result;
     }
