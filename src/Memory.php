@@ -11,7 +11,7 @@ class Memory implements Memoize
      *
      * @var array
      */
-    private $_cache = array();
+    private $_cache = [];
 
     /**
      * $cacheTime is ignored - this will keep the results around for the lifetime of this instance.

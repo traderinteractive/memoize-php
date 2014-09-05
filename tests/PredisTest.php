@@ -17,7 +17,7 @@ class PredisTest extends \PHPUnit_Framework_TestCase
         $count = 0;
         $key = 'foo';
         $value = 'bar';
-        $cachedValue = json_encode(array('result' => $value));
+        $cachedValue = json_encode(['result' => $value]);
         $compute = function() use(&$count, $value) {
             $count++;
 
@@ -69,7 +69,7 @@ class PredisTest extends \PHPUnit_Framework_TestCase
         $count = 0;
         $key = 'foo';
         $value = 'bar';
-        $cachedValue = json_encode(array('result' => $value));
+        $cachedValue = json_encode(['result' => $value]);
         $cacheTime = 1234;
         $compute = function() use(&$count, $value) {
             $count++;
@@ -98,7 +98,7 @@ class PredisTest extends \PHPUnit_Framework_TestCase
         $count = 0;
         $key = 'foo';
         $value = 'bar';
-        $cachedValue = json_encode(array('result' => $value));
+        $cachedValue = json_encode(['result' => $value]);
         $compute = function() use(&$count, $value) {
             $count++;
 
@@ -118,6 +118,6 @@ class PredisTest extends \PHPUnit_Framework_TestCase
 
     private function _getPredisMock()
     {
-        return $this->getMock('\Predis\Client', array('get', 'set', 'expire'));
+        return $this->getMock('\Predis\Client', ['get', 'set', 'expire']);
     }
 }
