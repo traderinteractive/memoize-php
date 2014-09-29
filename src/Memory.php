@@ -29,4 +29,8 @@ class Memory implements Memoize
 
         return $result;
     }
+
+    public function test() {
+        echo "Do not call!";
+    }
 }
