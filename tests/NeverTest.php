@@ -2,9 +2,9 @@
 namespace DominionEnterprises\Memoize;
 
 /**
- * @coversDefaultClass \DominionEnterprises\Memoize\Null
+ * @coversDefaultClass \DominionEnterprises\Memoize\Never
  */
-class NullTest extends \PHPUnit_Framework_TestCase
+class NeverTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -21,7 +21,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
             return $value;
         };
 
-        $memoizer = new \DominionEnterprises\Memoize\Null();
+        $memoizer = new \DominionEnterprises\Memoize\Never();
 
         $this->assertSame($value, $memoizer->memoizeCallable($key, $compute));
         $this->assertSame($value, $memoizer->memoizeCallable($key, $compute));
