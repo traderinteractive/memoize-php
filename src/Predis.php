@@ -16,13 +16,22 @@ class Predis implements Memoize
     private $_client;
 
     /**
+     * Cache refresh
+     *
+     * @var boolean
+     */
+    private $_refresh;
+
+    /**
      * Sets the predis client.
      *
      * @param \Predis\Client $client The predis client to use
+     * @param boolean $refresh If true we will always overwrite cache even if it is already set
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, $refresh = false)
     {
         $this->_client = $client;
+        $this->_refresh = $refresh;
     }
 
     /**
@@ -32,14 +41,16 @@ class Predis implements Memoize
      */
     public function memoizeCallable($key, $compute, $cacheTime = null)
     {
-        try {
-            $cached = $this->_client->get($key);
-            if ($cached !== null) {
-                $data = json_decode($cached, true);
-                return $data['result'];
+        if (!$this->_refresh) {
+            try {
+                $cached = $this->_client->get($key);
+                if ($cached !== null) {
+                    $data = json_decode($cached, true);
+                    return $data['result'];
+                }
+            } catch (\Exception $e) {
+                return call_user_func($compute);
             }
-        } catch (\Exception $e) {
-            return call_user_func($compute);
         }
 
         $result = call_user_func($compute);
