@@ -13,5 +13,5 @@ interface Memoize
      *
      * @return mixed The data requested, optionally pulled from cache
      */
-    public function memoizeCallable($key, $compute, $cacheTime = null);
+    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null);
 }

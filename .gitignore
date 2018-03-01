@@ -1,6 +1,5 @@
 /coverage/
 /vendor/
 clover.xml
-/nbproject/private
 composer.lock
 phpunit.xml

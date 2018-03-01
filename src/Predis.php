@@ -40,8 +40,14 @@ class Predis implements Memoize
      * so make sure that the value you return from $compute is json-encode-able.
      *
      * @see Memoize::memoizeCallable
+     *
+     * @param string   $key
+     * @param callable $compute
+     * @param int|null $cacheTime
+     *
+     * @return mixed
      */
-    public function memoizeCallable($key, $compute, $cacheTime = null)
+    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null)
     {
         if (!$this->refresh) {
             try {

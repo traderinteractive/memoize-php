@@ -18,8 +18,14 @@ class Memory implements Memoize
      * $cacheTime is ignored - this will keep the results around for the lifetime of this instance.
      *
      * @see Memoize::memoizeCallable
+     *
+     * @param string   $key
+     * @param callable $compute
+     * @param int|null $cacheTime
+     *
+     * @return mixed
      */
-    public function memoizeCallable($key, $compute, $cacheTime = null)
+    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null)
     {
         if (array_key_exists($key, $this->cache)) {
             return $this->cache[$key];
