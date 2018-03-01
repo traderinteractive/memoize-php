@@ -1,8 +1,10 @@
 <?php
-namespace DominionEnterprises\Memoize;
+
+namespace TraderInteractive\Memoize;
 
 /**
- * A memoizer that never caches and always recomputes the result.  This is useful for turning off memoization (e.g., for debugging).
+ * A memoizer that never caches and always recomputes the result.
+ * This is useful for turning off memoization (e.g., for debugging).
  */
 class Never implements Memoize
 {

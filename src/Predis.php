@@ -1,10 +1,11 @@
 <?php
-namespace DominionEnterprises\Memoize;
+
+namespace TraderInteractive\Memoize;
 
 use \Predis\Client;
 
 /**
- * A memoizer that caches the results in a redis cache.  
+ * A memoizer that caches the results in a redis cache.
  */
 class Predis implements Memoize
 {
@@ -13,37 +14,38 @@ class Predis implements Memoize
      *
      * @var \Predis\Client
      */
-    private $_client;
+    private $client;
 
     /**
      * Cache refresh
      *
      * @var boolean
      */
-    private $_refresh;
+    private $refresh;
 
     /**
      * Sets the predis client.
      *
-     * @param \Predis\Client $client The predis client to use
-     * @param boolean $refresh If true we will always overwrite cache even if it is already set
+     * @param \Predis\Client $client  The predis client to use
+     * @param boolean        $refresh If true we will always overwrite cache even if it is already set
      */
-    public function __construct(Client $client, $refresh = false)
+    public function __construct(Client $client, bool $refresh = false)
     {
-        $this->_client = $client;
-        $this->_refresh = $refresh;
+        $this->client = $client;
+        $this->refresh = $refresh;
     }
 
     /**
-     * The value is stored in redis as a json_encoded string, so make sure that the value you return from $compute is json-encodable.
+     * The value is stored in redis as a json_encoded string,
+     * so make sure that the value you return from $compute is json-encode-able.
      *
      * @see Memoize::memoizeCallable
      */
     public function memoizeCallable($key, $compute, $cacheTime = null)
     {
-        if (!$this->_refresh) {
+        if (!$this->refresh) {
             try {
-                $cached = $this->_client->get($key);
+                $cached = $this->client->get($key);
                 if ($cached !== null) {
                     $data = json_decode($cached, true);
                     return $data['result'];
@@ -55,7 +57,7 @@ class Predis implements Memoize
 
         $result = call_user_func($compute);
 
-        $this->_cache($key, json_encode(['result' => $result]), $cacheTime);
+        $this->cache($key, json_encode(['result' => $result]), $cacheTime);
 
         return $result;
     }
@@ -63,22 +65,25 @@ class Predis implements Memoize
     /**
      * Caches the value into redis with errors suppressed.
      *
-     * @param string $key The key.
-     * @param string $value The value.
-     * @param int $cacheTime The optional cache time
+     * @param string $key       The key.
+     * @param string $value     The value.
+     * @param int    $cacheTime The optional cache time
+     *
      * @return void
      */
-    private function _cache($key, $value, $cacheTime = null)
+    private function cache(string $key, string $value, int $cacheTime = null)
     {
         try {
-            $this->_client->set($key, $value);
+            $this->client->set($key, $value);
 
             if ($cacheTime !== null) {
-                $this->_client->expire($key, $cacheTime);
+                $this->client->expire($key, $cacheTime);
             }
         } catch (\Exception $e) {
-            // We don't want exceptions in accessing the cache to break functionality.  The cache should be as transparent as possible.
-            // If insight is needed into these exceptions, a better way would be by notifying an observer with the errors.
+            // We don't want exceptions in accessing the cache to break functionality.
+            // The cache should be as transparent as possible.
+            // If insight is needed into these exceptions,
+            // a better way would be by notifying an observer with the errors.
         }
     }
 }

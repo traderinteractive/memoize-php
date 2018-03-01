@@ -1,5 +1,6 @@
 <?php
-namespace DominionEnterprises\Memoize;
+
+namespace TraderInteractive\Memoize;
 
 /**
  * An in-memory memoizer that keeps the cached values around for the lifetime of this instance.
@@ -11,7 +12,7 @@ class Memory implements Memoize
      *
      * @var array
      */
-    private $_cache = [];
+    private $cache = [];
 
     /**
      * $cacheTime is ignored - this will keep the results around for the lifetime of this instance.
@@ -20,12 +21,12 @@ class Memory implements Memoize
      */
     public function memoizeCallable($key, $compute, $cacheTime = null)
     {
-        if (array_key_exists($key, $this->_cache)) {
-            return $this->_cache[$key];
+        if (array_key_exists($key, $this->cache)) {
+            return $this->cache[$key];
         }
 
         $result = call_user_func($compute);
-        $this->_cache[$key] = $result;
+        $this->cache[$key] = $result;
 
         return $result;
     }

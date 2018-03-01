@@ -1,11 +1,11 @@
 <?php
 
-namespace DominionEnterprises\Memoize;
+namespace TraderInteractive\Memoize;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \DominionEnterprises\Memoize\Memory
+ * @coversDefaultClass \TraderInteractive\Memoize\Memory
  */
 class MemoryTest extends TestCase
 {
@@ -18,7 +18,7 @@ class MemoryTest extends TestCase
         $count = 0;
         $key = 'foo';
         $value = 'bar';
-        $compute = function() use(&$count, $value) {
+        $compute = function () use (&$count, $value) {
             $count++;
 
             return $value;

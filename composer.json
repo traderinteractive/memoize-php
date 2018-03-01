@@ -26,6 +26,6 @@
         "predis/predis": "Allows for Redis-based memoization."
     },
     "autoload": {
-        "psr-4": { "DominionEnterprises\\Memoize\\": "src/" }
+        "psr-4": { "TraderInteractive\\Memoize\\": "src/" }
     }
 }
