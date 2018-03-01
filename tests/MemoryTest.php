@@ -1,10 +1,13 @@
 <?php
+
 namespace DominionEnterprises\Memoize;
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \DominionEnterprises\Memoize\Memory
  */
-class MemoryTest extends \PHPUnit_Framework_TestCase
+class MemoryTest extends TestCase
 {
     /**
      * @test

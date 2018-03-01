@@ -1,10 +1,13 @@
 <?php
+
 namespace DominionEnterprises\Memoize;
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \DominionEnterprises\Memoize\Never
  */
-class NeverTest extends \PHPUnit_Framework_TestCase
+class NeverTest extends TestCase
 {
     /**
      * @test

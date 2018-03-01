@@ -1,11 +1,14 @@
 <?php
+
 namespace DominionEnterprises\Memoize;
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \DominionEnterprises\Memoize\Predis
  * @covers ::<private>
  */
-class PredisTest extends \PHPUnit_Framework_TestCase
+class PredisTest extends TestCase
 {
     /**
      * @test
@@ -118,6 +121,6 @@ class PredisTest extends \PHPUnit_Framework_TestCase
 
     private function _getPredisMock()
     {
-        return $this->getMock('\Predis\Client', ['get', 'set', 'expire']);
+        return $this->getMockBuilder('\Predis\Client')->setMethods(['get', 'set', 'expire'])->getMock();
     }
 }
