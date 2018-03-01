@@ -1,20 +1,20 @@
 # Memoize
 A PHP library for memoizing repeated function calls.
 
-[![Build Status](http://img.shields.io/travis/dominionenterprises/memoize-php.svg?style=flat)](https://travis-ci.org/dominionenterprises/memoize-php)
-[![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/dominionenterprises/memoize-php.svg?style=flat)](https://scrutinizer-ci.com/g/dominionenterprises/memoize-php/)
-[![Code Coverage](http://img.shields.io/coveralls/dominionenterprises/memoize-php.svg?style=flat)](https://coveralls.io/r/dominionenterprises/memoize-php)
+[![Build Status](http://img.shields.io/travis/traderinteractive/memoize-php.svg?style=flat)](https://travis-ci.org/traderinteractive/memoize-php)
+[![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/traderinteractive/memoize-php.svg?style=flat)](https://scrutinizer-ci.com/g/traderinteractive/memoize-php/)
+[![Code Coverage](http://img.shields.io/coveralls/traderinteractive/memoize-php.svg?style=flat)](https://coveralls.io/r/traderinteractive/memoize-php)
 
-[![Latest Stable Version](http://img.shields.io/packagist/v/dominionenterprises/memoize.svg?style=flat)](https://packagist.org/packages/dominionenterprises/memoize)
-[![Total Downloads](http://img.shields.io/packagist/dt/dominionenterprises/memoize.svg?style=flat)](https://packagist.org/packages/dominionenterprises/memoize)
-[![License](http://img.shields.io/packagist/l/dominionenterprises/memoize.svg?style=flat)](https://packagist.org/packages/dominionenterprises/memoize)
+[![Latest Stable Version](http://img.shields.io/packagist/v/traderinteractive/memoize.svg?style=flat)](https://packagist.org/packages/traderinteractive/memoize)
+[![Total Downloads](http://img.shields.io/packagist/dt/traderinteractive/memoize.svg?style=flat)](https://packagist.org/packages/traderinteractive/memoize)
+[![License](http://img.shields.io/packagist/l/traderinteractive/memoize.svg?style=flat)](https://packagist.org/packages/traderinteractive/memoize)
 
 ## Requirements
-This library requires PHP 5.4, or newer.
+This library requires PHP 7.0, or newer.
 
 ## Installation
 This package uses [composer](https://getcomposer.org) so you can just add
-`dominionenterprises/memoize` as a dependency to your `composer.json` file.
+`traderinteractive/memoize` as a dependency to your `composer.json` file.
 
 ## Memoization
 [Memoization](http://en.wikipedia.org/wiki/Memoization) is a way of optimizing
@@ -22,7 +22,7 @@ a function that is called repeatedly by caching the results of a function call.
 
 ## Memoization Providers
 This library includes several built-in providers for memoization.  Each one
-implements the `\DominionEnterprises\Memoize\Memoize` interface:
+implements the `\TraderInteractive\Memoize\Memoize` interface:
 ```php
 interface Memoize
 {
@@ -90,7 +90,7 @@ rather than only caching computation for the current process.
 #### Example
 ```php
 $predis = new \Predis\Client($redisUrl);
-$memoize = new \DominionEnterprises\Memoize\Predis($predis);
+$memoize = new \TraderInteractive\Memoize\Predis($predis);
 
 $compute = function() {
     // Perform some long operation that you want to memoize
@@ -106,7 +106,7 @@ moment and only keeps the results around as long as the memoizer is in memory.
 
 #### Example
 ```php
-$memoize = new \DominionEnterprises\Memoize\Memory();
+$memoize = new \TraderInteractive\Memoize\Memory();
 
 $compute = function() {
     // Perform some long operation that you want to memoize
@@ -123,7 +123,7 @@ out for this one and everything will still work.
 
 #### Example
 ```php
-$memoize = new \DominionEnterprises\Memoize\Never();
+$memoize = new \TraderInteractive\Memoize\Never();
 
 $compute = function() {
     // Perform some long operation that you want to memoize

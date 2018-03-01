@@ -1,10 +1,13 @@
 <?php
-namespace DominionEnterprises\Memoize;
+
+namespace TraderInteractive\Memoize;
+
+use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \DominionEnterprises\Memoize\Never
+ * @coversDefaultClass \TraderInteractive\Memoize\Never
  */
-class NeverTest extends \PHPUnit_Framework_TestCase
+class NeverTest extends TestCase
 {
     /**
      * @test
@@ -15,13 +18,13 @@ class NeverTest extends \PHPUnit_Framework_TestCase
         $count = 0;
         $key = 'foo';
         $value = 'bar';
-        $compute = function() use(&$count, $value) {
+        $compute = function () use (&$count, $value) {
             $count++;
 
             return $value;
         };
 
-        $memoizer = new \DominionEnterprises\Memoize\Never();
+        $memoizer = new Never();
 
         $this->assertSame($value, $memoizer->memoizeCallable($key, $compute));
         $this->assertSame($value, $memoizer->memoizeCallable($key, $compute));

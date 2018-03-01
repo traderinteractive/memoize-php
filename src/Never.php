@@ -1,8 +1,10 @@
 <?php
-namespace DominionEnterprises\Memoize;
+
+namespace TraderInteractive\Memoize;
 
 /**
- * A memoizer that never caches and always recomputes the result.  This is useful for turning off memoization (e.g., for debugging).
+ * A memoizer that never caches and always recomputes the result.
+ * This is useful for turning off memoization (e.g., for debugging).
  */
 class Never implements Memoize
 {
@@ -10,8 +12,14 @@ class Never implements Memoize
      * $cacheTime and $key are ignored - this always calls $compute.
      *
      * @see Memoize::memoizeCallable
+     *
+     * @param string   $key
+     * @param callable $compute
+     * @param int|null $cacheTime
+     *
+     * @return mixed
      */
-    public function memoizeCallable($key, $compute, $cacheTime = null)
+    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null)
     {
         return call_user_func($compute);
     }
