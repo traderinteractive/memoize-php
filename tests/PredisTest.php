@@ -5,6 +5,7 @@ namespace TraderInteractive\Memoize;
 use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
 use Predis\Client;
+use Predis\ClientInterface;
 
 /**
  * @coversDefaultClass \TraderInteractive\Memoize\Predis
@@ -129,10 +130,7 @@ class PredisTest extends TestCase
         $this->assertSame(1, $count);
     }
 
-    /**
-     * @return PHPUnit_Framework_MockObject_MockObject|Client
-     */
-    private function getPredisMock() : PHPUnit_Framework_MockObject_MockObject
+    private function getPredisMock() : ClientInterface
     {
         return $this->getMockBuilder('\Predis\Client')->setMethods(['get', 'set', 'expire'])->getMock();
     }

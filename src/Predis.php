@@ -2,7 +2,7 @@
 
 namespace TraderInteractive\Memoize;
 
-use \Predis\Client;
+use Predis\ClientInterface;
 
 /**
  * A memoizer that caches the results in a redis cache.
@@ -12,7 +12,7 @@ class Predis implements Memoize
     /**
      * The predis client
      *
-     * @var \Predis\Client
+     * @var ClientInterface
      */
     private $client;
 
@@ -26,10 +26,10 @@ class Predis implements Memoize
     /**
      * Sets the predis client.
      *
-     * @param \Predis\Client $client  The predis client to use
-     * @param boolean        $refresh If true we will always overwrite cache even if it is already set
+     * @param ClientInterface $client  The predis client to use
+     * @param boolean         $refresh If true we will always overwrite cache even if it is already set
      */
-    public function __construct(Client $client, bool $refresh = false)
+    public function __construct(ClientInterface $client, bool $refresh = false)
     {
         $this->client = $client;
         $this->refresh = $refresh;
