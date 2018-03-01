@@ -17,3 +17,5 @@ tools:
     php_sim: true
 build_failure_conditions:
   - 'issues.label("coding-style").new.exists'
+  - 'elements.rating(< B).new.exists'
+  - 'project.metric("scrutinizer.quality", < 9)'
