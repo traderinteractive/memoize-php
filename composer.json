@@ -15,7 +15,7 @@
     },
     "require": {
         "php": "^7.0",
-        "ext-memcache": "^3.0.8",
+        "ext-memcache": "*",
         "ext-json": "*"
     },
     "require-dev": {
