@@ -7,11 +7,15 @@ php:
 env:
   - PREFER_LOWEST="--prefer-lowest --prefer-stable"
   - PREFER_LOWEST=""
+services:
+  - memcached
 matrix:
   fast_finish: true
   allow_failures:
     - php: nightly
 before_script:
+  - phpenv config-add memcache.ini
+  - echo "extension = memcache.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer update $PREFER_LOWEST
 script:
   - ./vendor/bin/phpunit --coverage-clover clover.xml
