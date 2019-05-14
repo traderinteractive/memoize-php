@@ -49,8 +49,8 @@ class Memcache implements Memoize
     {
         if (!$this->refresh) {
             try {
-                $cached = $this->client->get($key);
-                if ($cached !== false) {
+                $cached = $this->client->get($key, $flags, $flags);
+                if ($cached !== false && $cached != null) {
                     $data = json_decode($cached, true);
                     return $data['result'];
                 }
