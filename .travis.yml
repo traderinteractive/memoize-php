@@ -14,7 +14,6 @@ matrix:
   allow_failures:
     - php: nightly
 before_script:
-  - phpenv config-add memcache.ini
   - echo "extension = memcache.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer update $PREFER_LOWEST
 script:
