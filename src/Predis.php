@@ -24,15 +24,36 @@ class Predis implements Memoize
     private $refresh;
 
     /**
+     * The percentage of requests that check for refreshes
+     *
+     * @var int
+     */
+    private $refreshPercent;
+
+    /**
+     * The multiplier to use on runtime when deciding to do a refresh
+     *
+     * @var float
+     */
+    private $runtimeMultiplier;
+
+    /**
      * Sets the predis client.
      *
-     * @param ClientInterface $client  The predis client to use
-     * @param boolean         $refresh If true we will always overwrite cache even if it is already set
+     * @param ClientInterface $client         The predis client to use
+     * @param boolean         $refresh        If true we will always overwrite cache even if it is already set
+     * @param int             $refreshPercent The percentage of requests that check for refreshes
      */
-    public function __construct(ClientInterface $client, bool $refresh = false)
-    {
+    public function __construct(
+        ClientInterface $client,
+        bool $refresh = false,
+        int $refreshPercent = 0,
+        float $runtimeMultiplier = 3
+    ) {
         $this->client = $client;
         $this->refresh = $refresh;
+        $this->refreshPercent = $refreshPercent;
+        $this->runtimeMultiplier = $runtimeMultiplier;
     }
 
     /**
@@ -51,19 +72,37 @@ class Predis implements Memoize
     {
         if (!$this->refresh) {
             try {
+                if (rand(1, 100) <= $this->refreshPercent) {
+                    // {$refreshPercent}% of requests should check to see if this key is almost expired.
+                    // We don't want to check this on every call to preserve performance.
+                    // Also, this functionality is only important for requests that have many concurrent calls.
+                    $runtime = $this->client->get("{$key}.runtime");
+                    $ttl = $this->client->pttl($key) / 1000;
+                    if ($runtime && $runtime * $this->runtimeMultiplier > $ttl) {
+                        return $this->getData($key, $compute, $cacheTime);
+                    }
+                }
+
                 $cached = $this->client->get($key);
                 if ($cached !== null) {
                     $data = json_decode($cached, true);
                     return $data['result'];
                 }
             } catch (\Exception $e) {
-                return call_user_func($compute);
+                return $this->getData($key, $compute, $cacheTime);
             }
         }
 
-        $result = call_user_func($compute);
+        return $this->getData($key, $compute, $cacheTime);
+    }
 
-        $this->cache($key, json_encode(['result' => $result]), $cacheTime);
+    private function getData(string $key, callable $compute, int $cacheTime = null)
+    {
+        $start = microtime(true);
+        $result = call_user_func($compute);
+        $runtime = microtime(true) - $start;
+
+        $this->cache($key, json_encode(['result' => $result]), $cacheTime, $runtime);
 
         return $result;
     }
@@ -77,10 +116,11 @@ class Predis implements Memoize
      *
      * @return void
      */
-    private function cache(string $key, string $value, int $cacheTime = null)
+    private function cache(string $key, string $value, int $cacheTime = null, float $runtime)
     {
         try {
             $this->client->set($key, $value);
+            $this->client->set("{$key}.runtime", $runtime);
 
             if ($cacheTime !== null) {
                 $this->client->expire($key, $cacheTime);

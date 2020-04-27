@@ -74,6 +74,39 @@ class PredisTest extends TestCase
      * @covers ::__construct
      * @covers ::memoizeCallable
      */
+    public function memoizeCallableRefreshRequest()
+    {
+        $count = 0;
+        $key = 'foo';
+        $value = 'bar';
+        $cachedValue = json_encode(['result' => $value]);
+        $cacheTime = 1234;
+        $compute = function () use (&$count, $value) {
+            $count++;
+
+            return $value;
+        };
+
+        $client = $this->getPredisMock();
+        $client->expects($this->at(0))->method('get')->with(
+            $this->equalTo("{$key}.runtime")
+        )->will($this->returnValue(.2));
+        $client->expects($this->at(1))->method('pttl')->with($this->equalTo($key))->will($this->returnValue(10));
+        $client->expects($this->at(2))->method('set')->with($this->equalTo($key), $this->equalTo($cachedValue));
+        $client->expects($this->at(3))->method('set')->with($this->equalTo("{$key}.runtime"), $this->lessThan(1));
+        $client->expects($this->at(4))->method('expire')->with($this->equalTo($key), $this->equalTo($cacheTime));
+
+        $memoizer = new Predis($client, false, 100);
+
+        $this->assertSame($value, $memoizer->memoizeCallable($key, $compute, $cacheTime));
+        $this->assertSame(1, $count);
+    }
+
+    /**
+     * @test
+     * @covers ::__construct
+     * @covers ::memoizeCallable
+     */
     public function memoizeCallableWithUncachedKey()
     {
         $count = 0;
@@ -88,9 +121,10 @@ class PredisTest extends TestCase
         };
 
         $client = $this->getPredisMock();
-        $client->expects($this->once())->method('get')->with($this->equalTo($key))->will($this->returnValue(null));
-        $client->expects($this->once())->method('set')->with($this->equalTo($key), $this->equalTo($cachedValue));
-        $client->expects($this->once())->method('expire')->with($this->equalTo($key), $this->equalTo($cacheTime));
+        $client->expects($this->at(0))->method('get')->with($this->equalTo($key))->will($this->returnValue(null));
+        $client->expects($this->at(1))->method('set')->with($this->equalTo($key), $this->equalTo($cachedValue));
+        $client->expects($this->at(2))->method('set')->with($this->equalTo("{$key}.runtime"), $this->lessThan(1));
+        $client->expects($this->at(3))->method('expire')->with($this->equalTo($key), $this->equalTo($cacheTime));
 
         $memoizer = new Predis($client);
 
@@ -132,6 +166,8 @@ class PredisTest extends TestCase
 
     private function getPredisMock() : ClientInterface
     {
-        return $this->getMockBuilder('\Predis\Client')->setMethods(['get', 'set', 'expire'])->getMock();
+        return $this->getMockBuilder('\Predis\Client')->setMethods(
+            ['get', 'set', 'expire', 'del', 'exec', 'unwatch', 'pttl']
+        )->getMock();
     }
 }
