@@ -14,7 +14,8 @@ matrix:
   allow_failures:
     - php: nightly
 before_script:
-  - echo "extension = memcache.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - phpenv config-add .travis/memcached.ini
+  - phpenv config-add .travis/memcache.ini
   - composer update $PREFER_LOWEST
 script:
   - ./vendor/bin/phpunit --coverage-clover clover.xml
