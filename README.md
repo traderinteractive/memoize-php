@@ -100,6 +100,28 @@ $compute = function() {
 $result = $memoize->memoizeCallable('myLongOperation', $compute, 3600);
 ```
 
+### Memcache
+The memcache provider uses the [memcache](https://www.php.net/manual/en/book.memcache.php) library to
+cache the results in Memcache.  It supports the `$cacheTime` parameter so that
+results can be recomputed after the time expires.
+
+This memoizer can be used in a way that makes it persistent between processes
+rather than only caching computation for the current process.
+
+#### Example
+```php
+$memcache = new Memcache;
+$memcacheInstance = $memcache->connect('127.0.0.1', 11211);
+$memoize = new \TraderInteractive\Memoize\Memcache($memcacheInstance);
+
+$compute = function() {
+    // Perform some long operation that you want to memoize
+};
+
+// Cache he results of $compute for 1 hour.
+$result = $memoize->memoizeCallable('myLongOperation', $compute, 3600);
+```
+
 ### Memory
 This is a standard in-memory memoizer.  It does not support `$cacheTime` at the
 moment and only keeps the results around as long as the memoizer is in memory.
