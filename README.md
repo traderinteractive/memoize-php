@@ -115,7 +115,7 @@ $compute = function() {
 $result = $memoize->memoizeCallable('myLongOperation', $compute);
 ```
 
-### Never
+### None
 This memoizer does not actually memoize anything - it always calls the
 `$compute` function.  It is useful for testing and can also be used when you
 disable memoization for debugging, etc. because you can swap your real memoizer
@@ -123,7 +123,7 @@ out for this one and everything will still work.
 
 #### Example
 ```php
-$memoize = new \TraderInteractive\Memoize\Never();
+$memoize = new \TraderInteractive\Memoize\None();
 
 $compute = function() {
     // Perform some long operation that you want to memoize

@@ -6,7 +6,7 @@ namespace TraderInteractive\Memoize;
  * A memoizer that never caches and always recomputes the result.
  * This is useful for turning off memoization (e.g., for debugging).
  */
-class Never implements Memoize
+class None implements Memoize
 {
     /**
      * $cacheTime and $key are ignored - this always calls $compute.
