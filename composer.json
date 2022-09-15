@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": { "TraderInteractive\\Memoize\\": "src/" }
-    }
+    },
     "scripts": {
         "lint": "vendor/bin/phpcs",
         "test": "vendor/bin/phpunit"
