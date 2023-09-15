@@ -124,6 +124,7 @@ class Predis implements Memoize
 
             if ($cacheTime !== null) {
                 $this->client->expire($key, $cacheTime);
+                $this->client->expire("{$key}.runtime", $cacheTime);
             }
         } catch (\Exception $e) {
             // We don't want exceptions in accessing the cache to break functionality.

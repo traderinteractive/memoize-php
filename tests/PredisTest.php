@@ -96,7 +96,10 @@ class PredisTest extends TestCase
             [$this->equalTo($key), $this->equalTo($cachedValue)],
             [$this->equalTo("{$key}.runtime"), $this->lessThan(1)]
         );
-        $client->expects($this->once())->method('expire')->with($this->equalTo($key), $this->equalTo($cacheTime));
+        $client->expects($this->exactly(2))->method('expire')->withConsecutive(
+            [$this->equalTo($key), $this->equalTo($cacheTime)],
+            [$this->equalTo("{$key}.runtime"), $this->equalTo($cacheTime)]
+        );
 
         $memoizer = new Predis($client, false, 100);
 
@@ -128,7 +131,10 @@ class PredisTest extends TestCase
             [$this->equalTo($key), $this->equalTo($cachedValue)],
             [$this->equalTo("{$key}.runtime"), $this->lessThan(1)]
         );
-        $client->expects($this->once())->method('expire')->with($this->equalTo($key), $this->equalTo($cacheTime));
+        $client->expects($this->exactly(2))->method('expire')->withConsecutive(
+            [$this->equalTo($key), $this->equalTo($cacheTime)],
+            [$this->equalTo("{$key}.runtime"), $this->equalTo($cacheTime)]
+        );
 
         $memoizer = new Predis($client);
 
