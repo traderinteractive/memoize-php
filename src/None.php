@@ -16,10 +16,11 @@ class None implements Memoize
      * @param string   $key
      * @param callable $compute
      * @param int|null $cacheTime
+     * @param bool     $shouldUpdate
      *
      * @return mixed
      */
-    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null)
+    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null, $shouldUpdate = false)
     {
         return call_user_func($compute);
     }

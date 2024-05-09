@@ -65,10 +65,11 @@ class Predis implements Memoize
      * @param string   $key
      * @param callable $compute
      * @param int|null $cacheTime
+     * @param bool     $shouldUpdate
      *
      * @return mixed
      */
-    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null)
+    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null, bool $shouldUpdate = false)
     {
         if (!$this->refresh) {
             try {
@@ -84,9 +85,12 @@ class Predis implements Memoize
                 }
 
                 $cached = $this->client->get($key);
-                if ($cached !== null) {
-                    $data = json_decode($cached, true);
-                    return $data['result'];
+                if ($shouldUpdate === false) {
+                    $cached = $this->client->get($key);
+                    if ($cached !== null) {
+                        $data = json_decode($cached, true);
+                        return $data['result'];
+                    }
                 }
             } catch (\Exception $e) {
                 return $this->getData($key, $compute, $cacheTime);
