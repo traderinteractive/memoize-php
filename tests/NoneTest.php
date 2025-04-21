@@ -1,8 +1,9 @@
 <?php
 
-namespace TraderInteractive\Memoize;
+namespace TraderInteractiveTest\Memoize;
 
 use PHPUnit\Framework\TestCase;
+use TraderInteractive\Memoize\None;
 
 /**
  * @coversDefaultClass \TraderInteractive\Memoize\None
