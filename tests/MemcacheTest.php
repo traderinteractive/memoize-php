@@ -86,7 +86,8 @@ class MemcacheTest extends TestCase
 
         $client = $this->getMemcacheMock();
         $client->expects($this->once())->method('get')->with($this->equalTo($key))->will($this->returnValue(null));
-        $client->expects($this->once())->method('set')->with($this->equalTo($key), $this->equalTo($cachedValue), $this->equalTo(0), $this->equalTo($cacheTime));
+        $client->expects($this->once())->method('set')
+            ->with($this->equalTo($key), $this->equalTo($cachedValue), $this->equalTo(0), $this->equalTo($cacheTime));
 
         $memoizer = new Memcache($client);
 
