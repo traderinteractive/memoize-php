@@ -1,10 +1,6 @@
 # Memoize
 A PHP library for memoizing repeated function calls.
 
-[![Build Status](http://img.shields.io/travis/traderinteractive/memoize-php.svg?style=flat)](https://travis-ci.org/traderinteractive/memoize-php)
-[![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/traderinteractive/memoize-php.svg?style=flat)](https://scrutinizer-ci.com/g/traderinteractive/memoize-php/)
-[![Code Coverage](http://img.shields.io/coveralls/traderinteractive/memoize-php.svg?style=flat)](https://coveralls.io/r/traderinteractive/memoize-php)
-
 [![Latest Stable Version](http://img.shields.io/packagist/v/traderinteractive/memoize.svg?style=flat)](https://packagist.org/packages/traderinteractive/memoize)
 [![Total Downloads](http://img.shields.io/packagist/dt/traderinteractive/memoize.svg?style=flat)](https://packagist.org/packages/traderinteractive/memoize)
 [![License](http://img.shields.io/packagist/l/traderinteractive/memoize.svg?style=flat)](https://packagist.org/packages/traderinteractive/memoize)
