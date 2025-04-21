@@ -42,12 +42,13 @@ class Memcache implements Memoize
      * @param string   $key
      * @param callable $compute
      * @param int|null $cacheTime
+     * @param bool     $refresh
      *
      * @return mixed
      */
-    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null)
+    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null, bool $refresh = false)
     {
-        if (!$this->refresh) {
+        if (!$this->refresh && !$refresh) {
             try {
                 $cached = $this->client->get($key, $flags, $flags);
                 if ($cached !== false && $cached != null) {
