@@ -129,6 +129,12 @@ class MemcacheTest extends TestCase
 
     public function getMemcacheMock() : \Memcache
     {
-        return $this->getMockBuilder('\Memcache')->setMethods(['get', 'set'])->getMock();
+        if (PHP_VERSION_ID < 80000) {
+            require_once 'MemcacheMockable.php';
+            return $this->getMockBuilder(MemcacheMockable::class)
+                ->setMethods(['get', 'set'])->getMock();
+        } else {
+            return $this->getMockBuilder(\Memcache::class)->setMethods(['get', 'set'])->getMock();
+        }
     }
 }
