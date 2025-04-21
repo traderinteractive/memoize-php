@@ -1,11 +1,12 @@
 <?php
 
-namespace TraderInteractive\Memoize;
+namespace TraderInteractiveTest\Memoize;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
 use Predis\Client;
 use Predis\ClientInterface;
+use TraderInteractive\Memoize\Predis;
 
 /**
  * @coversDefaultClass \TraderInteractive\Memoize\Predis

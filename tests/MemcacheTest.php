@@ -1,9 +1,9 @@
 <?php
 
-namespace TraderInteractive\Memoize;
+namespace TraderInteractiveTest\Memoize;
 
 use PHPUnit\Framework\TestCase;
-use TraderInteractiveTest\Memoize\MemcacheMockable;
+use TraderInteractive\Memoize\Memcache;
 
 /**
  * @coversDefaultClass \TraderInteractive\Memoize\Memcache
