@@ -33,6 +33,10 @@
     "autoload": {
         "psr-4": { "TraderInteractive\\Memoize\\": "src/" }
     },
+    "autoload-dev": {
+        "psr-4": { "TraderInteractiveTest\\Memoize\\": "tests/" }
+    },
+
     "scripts": {
         "lint": "vendor/bin/phpcs",
         "test": "vendor/bin/phpunit"

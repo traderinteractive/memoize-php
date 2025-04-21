@@ -3,6 +3,7 @@
 namespace TraderInteractive\Memoize;
 
 use PHPUnit\Framework\TestCase;
+use TraderInteractiveTest\Memoize\MemcacheMockable;
 
 /**
  * @coversDefaultClass \TraderInteractive\Memoize\Memcache
@@ -129,12 +130,8 @@ class MemcacheTest extends TestCase
 
     public function getMemcacheMock() : \Memcache
     {
-        if (PHP_VERSION_ID < 80000) {
-            require_once 'MemcacheMockable.php';
-            return $this->getMockBuilder(MemcacheMockable::class)
-                ->setMethods(['get', 'set'])->getMock();
-        } else {
-            return $this->getMockBuilder(\Memcache::class)->setMethods(['get', 'set'])->getMock();
-        }
+        $isOlderPHPVersion = PHP_VERSION_ID < 80000;
+        $memcacheClass = $isOlderPHPVersion ? MemcacheMockable::class : \Memcache::class;
+        return $this->getMockBuilder($memcacheClass)->setMethods(['get', 'set'])->getMock();
     }
 }

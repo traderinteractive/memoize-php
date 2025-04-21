@@ -1,6 +1,6 @@
 <?php
 
-namespace TraderInteractive\Memoize;
+namespace TraderInteractiveTest\Memoize;
 
 class MemcacheMockable extends \Memcache
 {
