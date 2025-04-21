@@ -65,12 +65,13 @@ class Predis implements Memoize
      * @param string   $key
      * @param callable $compute
      * @param int|null $cacheTime
+     * @param bool     $refresh
      *
      * @return mixed
      */
-    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null)
+    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null, bool $refresh = false)
     {
-        if (!$this->refresh) {
+        if (!$this->refresh && !$refresh) {
             try {
                 if (rand(1, 100) <= $this->refreshPercent) {
                     // {$refreshPercent}% of requests should check to see if this key is almost expired.
@@ -82,7 +83,6 @@ class Predis implements Memoize
                         return $this->getData($key, $compute, $cacheTime);
                     }
                 }
-
                 $cached = $this->client->get($key);
                 if ($cached !== null) {
                     $data = json_decode($cached, true);
@@ -124,6 +124,7 @@ class Predis implements Memoize
 
             if ($cacheTime !== null) {
                 $this->client->expire($key, $cacheTime);
+                $this->client->expire("{$key}.runtime", $cacheTime);
             }
         } catch (\Exception $e) {
             // We don't want exceptions in accessing the cache to break functionality.

@@ -22,12 +22,13 @@ class Memory implements Memoize
      * @param string   $key
      * @param callable $compute
      * @param int|null $cacheTime
+     * @param bool     $refresh
      *
      * @return mixed
      */
-    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null)
+    public function memoizeCallable(string $key, callable $compute, int $cacheTime = null, bool $refresh = false)
     {
-        if (array_key_exists($key, $this->cache)) {
+        if (array_key_exists($key, $this->cache) && !$refresh) {
             return $this->cache[$key];
         }
 

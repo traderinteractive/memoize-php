@@ -88,13 +88,18 @@ class PredisTest extends TestCase
         };
 
         $client = $this->getPredisMock();
-        $client->expects($this->at(0))->method('get')->with(
+        $client->expects($this->once())->method('get')->with(
             $this->equalTo("{$key}.runtime")
         )->will($this->returnValue(.2));
-        $client->expects($this->at(1))->method('pttl')->with($this->equalTo($key))->will($this->returnValue(10));
-        $client->expects($this->at(2))->method('set')->with($this->equalTo($key), $this->equalTo($cachedValue));
-        $client->expects($this->at(3))->method('set')->with($this->equalTo("{$key}.runtime"), $this->lessThan(1));
-        $client->expects($this->at(4))->method('expire')->with($this->equalTo($key), $this->equalTo($cacheTime));
+        $client->expects($this->once())->method('pttl')->with($this->equalTo($key))->will($this->returnValue(10));
+        $client->expects($this->exactly(2))->method('set')->withConsecutive(
+            [$this->equalTo($key), $this->equalTo($cachedValue)],
+            [$this->equalTo("{$key}.runtime"), $this->lessThan(1)]
+        );
+        $client->expects($this->exactly(2))->method('expire')->withConsecutive(
+            [$this->equalTo($key), $this->equalTo($cacheTime)],
+            [$this->equalTo("{$key}.runtime"), $this->equalTo($cacheTime)]
+        );
 
         $memoizer = new Predis($client, false, 100);
 
@@ -121,10 +126,15 @@ class PredisTest extends TestCase
         };
 
         $client = $this->getPredisMock();
-        $client->expects($this->at(0))->method('get')->with($this->equalTo($key))->will($this->returnValue(null));
-        $client->expects($this->at(1))->method('set')->with($this->equalTo($key), $this->equalTo($cachedValue));
-        $client->expects($this->at(2))->method('set')->with($this->equalTo("{$key}.runtime"), $this->lessThan(1));
-        $client->expects($this->at(3))->method('expire')->with($this->equalTo($key), $this->equalTo($cacheTime));
+        $client->expects($this->once())->method('get')->with($this->equalTo($key))->will($this->returnValue(null));
+        $client->expects($this->exactly(2))->method('set')->withConsecutive(
+            [$this->equalTo($key), $this->equalTo($cachedValue)],
+            [$this->equalTo("{$key}.runtime"), $this->lessThan(1)]
+        );
+        $client->expects($this->exactly(2))->method('expire')->withConsecutive(
+            [$this->equalTo($key), $this->equalTo($cacheTime)],
+            [$this->equalTo("{$key}.runtime"), $this->equalTo($cacheTime)]
+        );
 
         $memoizer = new Predis($client);
 

@@ -5,9 +5,9 @@ namespace TraderInteractive\Memoize;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \TraderInteractive\Memoize\Never
+ * @coversDefaultClass \TraderInteractive\Memoize\None
  */
-class NeverTest extends TestCase
+class NoneTest extends TestCase
 {
     /**
      * @test
@@ -24,7 +24,7 @@ class NeverTest extends TestCase
             return $value;
         };
 
-        $memoizer = new Never();
+        $memoizer = new None();
 
         $this->assertSame($value, $memoizer->memoizeCallable($key, $compute));
         $this->assertSame($value, $memoizer->memoizeCallable($key, $compute));
