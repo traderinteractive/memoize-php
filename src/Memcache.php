@@ -62,8 +62,9 @@ class Memcache implements Memoize
         $result = call_user_func($compute);
 
         // If the result is false/null/empty, then there is no point in storing it in cache.
-        if ($result === false || $result == null || empty($result))
+        if ($result === false || $result == null || empty($result)) {
             return $result;
+        }
 
         $this->cache($key, json_encode(['result' => $result]), $cacheTime);
 
